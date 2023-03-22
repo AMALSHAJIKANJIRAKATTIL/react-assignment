@@ -8,9 +8,7 @@ function CallFunction(props){
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        function onSubmit(data) {
-            console.log(data);
-            
+        function onSubmit(data) {            
             return dispatch(authActions.newCard( { name:`${data.name}'s Card`, cardExpiration:data.expiry,cardHolder:data.name,cardNumber:data.number,category:'AE' } ));
         };
         onSubmit(props.formData);

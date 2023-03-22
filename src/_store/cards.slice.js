@@ -33,7 +33,7 @@ function createExtraActions() {
     function getAll() {
         return createAsyncThunk(
             `${name}/getAll`,
-            async () => await fetchWrapper.get(`${baseUrl}/cards`)
+            async () => await fetchWrapper.get(`${baseUrl}/cards?sortBy=name:asc&limit=100`)
         );
     }
 }

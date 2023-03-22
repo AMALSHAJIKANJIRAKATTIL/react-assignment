@@ -7,14 +7,25 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { cardActions } from '_store';
 
-import './style.css'
+import './styles.css';
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-cards";
+
+import "./styles.css";
+
+// import required modules
+import { EffectCards } from "swiper";
+
 export {Cards};
 
 function  Cards() {
     const dispatch = useDispatch();
     
     const { cards } = useSelector(x => x.cards);
-    console.log(cards);
     useEffect(() => {
         dispatch(cardActions.getAll());
         
@@ -35,18 +46,27 @@ function  Cards() {
 
         {Object.keys(cards).length != 0 &&
                 <div className="App-cards-list">
+                    <Swiper
+        effect={"cards"}
+        grabCursor={true}
+        modules={[EffectCards]}
+        className="mySwiper"
+      >
                     {cards.results?.map(card =>
 
-                         <div style={{marginTop:'10px'}} className='cards'>
-                         <Card
+                         <SwiperSlide>
+                             <Card
                            name={card.cardHolder}
                            number={card.cardNumber}
                            expiry={card.cardExpiration}
                            
                          />
-                         </div>
+                         </SwiperSlide>
+                        
+                       
                          
                     )}
+       </Swiper>
                </div>
             }
             {cards.loading && <div className="spinner-border spinner-border-sm"></div>}
